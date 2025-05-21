@@ -50,8 +50,12 @@ public sealed class ConsoleCommandBridgeGenerator : IIncrementalGenerator {
             return null;
         }
 
+        var consoleAttrSymbol = context.SemanticModel.Compilation
+                                       .GetTypeByMetadataName("LokiCat.PankuConsoleBridge.ConsoleCommandAttribute");
+
         var attr = methodSymbol.GetAttributes()
-                               .FirstOrDefault(ad => ad.AttributeClass?.ToDisplayString() == "LokiCat.PankuConsoleBridge.ConsoleCommandAttribute");
+                               .FirstOrDefault(ad => SymbolEqualityComparer.Default.Equals(ad.AttributeClass, consoleAttrSymbol));
+
         if (attr is null)
         {
             return null;
