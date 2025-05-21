@@ -37,10 +37,10 @@ jobs:
         uses: actions/setup-dotnet@v4
 
       - name: Build project
-        run: dotnet build src/LokiCat.PankuConsole.DotNet.ObservableGenerator/LokiCat.PankuConsole.DotNet.ObservableGenerator.csproj --configuration Release -p:Deterministic=true -p:ContinuousIntegrationBuild=true -p:PathMap=`pwd`=.
+        run: dotnet build src/LokiCat.PankuConsole.DotNet.CommandGenerator/LokiCat.PankuConsole.DotNet.CommandGenerator.csproj --configuration Release -p:Deterministic=true -p:ContinuousIntegrationBuild=true -p:PathMap=`pwd`=.
 
       - name: Pack project
-        run: dotnet pack src/LokiCat.PankuConsole.DotNet.ObservableGenerator/LokiCat.PankuConsole.DotNet.ObservableGenerator.csproj --no-build --configuration Release --output "$NuGetDirectory" /p:Version=${{ inputs.version }}
+        run: dotnet pack src/LokiCat.PankuConsole.DotNet.CommandGenerator/LokiCat.PankuConsole.DotNet.CommandGenerator.csproj --no-build --configuration Release --output "$NuGetDirectory" /p:Version=${{ inputs.version }}
 
       - name: Upload NuGet package
         uses: actions/upload-artifact@v4

@@ -17,7 +17,7 @@
         <Version>1.0.0</Version>
         <Authors>Alex Hall</Authors>
         <Description>Generates GDScript PankuCommands based on DotNet [ConsoleCommand] Attribute</Description>
-        <PackageTags>godot r3 roslyn rx observable</PackageTags>
+        <PackageTags>godot panku</PackageTags>
         <PackageProjectUrl>https://github.com/fahall/LokiCat.PankuConsole.DotNet</PackageProjectUrl>
         <RepositoryUrl>https://github.com/fahall/LokiCat.PankuConsole.DotNet.git</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
@@ -29,7 +29,7 @@
         <EmbedAllSources>true</EmbedAllSources>
         <SourceLinkCreate>true</SourceLinkCreate>
         <AssemblyTitle>LokiCat.PankuConsole.DotNet.CommandGenerator</AssemblyTitle>
-        <Description>Generates AsObservable extensions for Godot Signals</Description>
+        <Description>Exposes C# Functions on Nodes to PankuConsole via [ConsoleCommand]</Description>
         <Company>LokiCat</Company>
         <Product>LokiCat.PankuConsole.DotNet.CommandGenerator</Product>
         <DebugSymbols>true</DebugSymbols>
