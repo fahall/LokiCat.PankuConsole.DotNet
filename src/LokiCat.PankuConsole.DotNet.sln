@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LokiCat.PankuConsole.DotNet.CommandGenerator", "LokiCat.PankuConsole.DotNet.CommandGenerator\LokiCat.PankuConsole.DotNet.CommandGenerator.csproj", "{3B07270D-BB42-4B77-BE30-824C112F298C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{080369E7-F8F4-4550-ACDD-70890B6F3CA3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{080369E7-F8F4-4550-ACDD-70890B6F3CA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{080369E7-F8F4-4550-ACDD-70890B6F3CA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{080369E7-F8F4-4550-ACDD-70890B6F3CA3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B24973A3-2459-4EA7-AE63-E5BBF3B699A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B24973A3-2459-4EA7-AE63-E5BBF3B699A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B24973A3-2459-4EA7-AE63-E5BBF3B699A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B24973A3-2459-4EA7-AE63-E5BBF3B699A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{147E5C10-8A9A-44B8-9A6F-FE7C9A86EE6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{147E5C10-8A9A-44B8-9A6F-FE7C9A86EE6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{147E5C10-8A9A-44B8-9A6F-FE7C9A86EE6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{147E5C10-8A9A-44B8-9A6F-FE7C9A86EE6E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{837AB06C-52CC-43B9-A5A2-9073A566F208}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{837AB06C-52CC-43B9-A5A2-9073A566F208}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{837AB06C-52CC-43B9-A5A2-9073A566F208}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{837AB06C-52CC-43B9-A5A2-9073A566F208}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B07270D-BB42-4B77-BE30-824C112F298C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B07270D-BB42-4B77-BE30-824C112F298C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B07270D-BB42-4B77-BE30-824C112F298C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B07270D-BB42-4B77-BE30-824C112F298C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

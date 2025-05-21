@@ -1,0 +1,109 @@
+﻿# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
+
+name: publish
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - '*'
+
+  workflow_call:
+    inputs:
+      deploy:
+        required: false
+        default: false
+        description: "Deploy the package to NuGet"
+        type: boolean
+      version:
+        required: true
+        type: string
+        description: "Semantic version number for the NuGet package"
+
+env:
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
+  DOTNET_NOLOGO: true
+  NuGetDirectory: ${{ github.workspace }}/nuget
+
+jobs:
+  create_nuget:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+
+      - name: Build project
+        run: dotnet build src/LokiCat.PankuConsole.DotNet.ObservableGenerator/LokiCat.PankuConsole.DotNet.ObservableGenerator.csproj --configuration Release -p:Deterministic=true -p:ContinuousIntegrationBuild=true -p:PathMap=`pwd`=.
+
+      - name: Pack project
+        run: dotnet pack src/LokiCat.PankuConsole.DotNet.ObservableGenerator/LokiCat.PankuConsole.DotNet.ObservableGenerator.csproj --no-build --configuration Release --output "$NuGetDirectory" /p:Version=${{ inputs.version }}
+
+      - name: Upload NuGet package
+        uses: actions/upload-artifact@v4
+        with:
+          name: nuget
+          if-no-files-found: error
+          retention-days: 7
+          path: ${{ env.NuGetDirectory }}/*
+
+  validate_nuget:
+    runs-on: ubuntu-latest
+    needs: [create_nuget]
+    steps:
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+
+      - name: Download NuGet package
+        uses: actions/download-artifact@v4
+        with:
+          name: nuget
+          path: ${{ env.NuGetDirectory }}
+
+      - name: Install NuGet validator
+        run: dotnet tool update Meziantou.Framework.NuGetPackageValidation.Tool --global
+
+      - name: Validate package
+        run: |
+          for file in "$NuGetDirectory"/*.nupkg; do
+            meziantou.validate-nuget-package "$file"
+          done
+
+  deploy:
+    if: ${{ inputs.deploy }}
+    runs-on: ubuntu-latest
+    needs: [validate_nuget]
+    steps:
+      - name: Download NuGet package
+        uses: actions/download-artifact@v4
+        with:
+          name: nuget
+          path: ${{ env.NuGetDirectory }}
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+
+      - name: Upload NuGet assets to GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ inputs.version }}
+          files: |
+            ${{ env.NuGetDirectory }}/*.nupkg
+            ${{ env.NuGetDirectory }}/*.snupkg
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Publish NuGet package
+        run: |
+          find "$NuGetDirectory" -name '*.nupkg' | while read -r file; do
+            dotnet nuget push "$file" --api-key "${{ secrets.NUGET_APIKEY }}" --source https://api.nuget.org/v3/index.json --skip-duplicate
+          done
+
+      - name: Publish NuGet symbol package
+        run: |
+          find "$NuGetDirectory" -name '*.snupkg' | while read -r file; do
+            dotnet nuget push "$file" --api-key "${{ secrets.NUGET_APIKEY }}" --source https://api.nuget.org/v3/index.json --skip-duplicate
+          done
