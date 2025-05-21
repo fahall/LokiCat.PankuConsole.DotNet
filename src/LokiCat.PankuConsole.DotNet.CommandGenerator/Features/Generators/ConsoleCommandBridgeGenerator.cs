@@ -31,8 +31,8 @@ public sealed class ConsoleCommandBridgeGenerator : IIncrementalGenerator {
                                                               /// </summary>
                                                               [AttributeUsage(AttributeTargets.Method)]
                                                               public sealed class ConsoleCommandAttribute : Attribute {
-                                                                public string? CommandName { get; }
-                                                                public ConsoleCommandAttribute(string? commandName = null) {
+                                                                public string CommandName { get; }
+                                                                public ConsoleCommandAttribute(string commandName = string.Empty) {
                                                                   CommandName = commandName;
                                                                 }
                                                               }
