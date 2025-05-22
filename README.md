@@ -11,7 +11,7 @@ It automatically generates a `ConsoleBridge.gd` file with `@panku_command` funct
 * ✔️ Auto-generates `@panku_command` wrappers for `[ConsoleCommand]` methods
 * ✔️ Supports async methods (`Task`)
 * ✔️ Supports optional/default parameters with arity overloads
-* ✔️ Groups commands by class name using `snake_case.classMethod()`
+* ✔️ Groups commands by class name using `ClassName.MethodName()`
 * ✔️ Emits PascalCase if custom name is given
 * ✔️ Self-contained — no need to define the attribute manually
 
