@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using System.Text;
@@ -32,7 +33,7 @@ public sealed class ConsoleCommandBridgeGenerator : IIncrementalGenerator {
                                                               [AttributeUsage(AttributeTargets.Method)]
                                                               public sealed class ConsoleCommandAttribute : Attribute {
                                                                 public string CommandName { get; }
-                                                                public ConsoleCommandAttribute(string commandName = "") {
+                                                                public ConsoleCommandAttribute(string commandName = string.Empty) {
                                                                   CommandName = commandName;
                                                                 }
                                                               }
@@ -64,7 +65,7 @@ public sealed class ConsoleCommandBridgeGenerator : IIncrementalGenerator {
         }
 
         var classSymbol = methodSymbol.ContainingType;
-        var commandName = attr.ConstructorArguments.FirstOrDefault().Value as string;
+        var commandName = attr.ConstructorArguments.Length > 0 && attr.ConstructorArguments[0].Value is string s ? s : null;
 
         var parameters = methodSymbol.Parameters
                                      .Select(p => new ConsoleCommandParameter(p.Name, p.Type.ToDisplayString(), p.HasExplicitDefaultValue, p.ExplicitDefaultValue))
@@ -75,12 +76,13 @@ public sealed class ConsoleCommandBridgeGenerator : IIncrementalGenerator {
             MethodName: methodSymbol.Name,
             IsAsync: methodSymbol.IsAsync,
             Parameters: parameters,
-            CustomName: commandName?.Trim(),
+            CustomName: commandName,
             methodSyntax.GetLocation()
         );
     }
 
     private static void EmitGDScript(SourceProductionContext context, ImmutableArray<ConsoleCommandInfo?> commandsRaw) {
+        try {
         var commands = commandsRaw!.OfType<ConsoleCommandInfo>().ToList();
         var sb = new StringBuilder();
         sb.AppendLine("extends Node");
@@ -98,7 +100,7 @@ public sealed class ConsoleCommandBridgeGenerator : IIncrementalGenerator {
             context.ReportDiagnostic(Diagnostic.Create(
                                          new DiagnosticDescriptor("CCBG001", "Command Found", $"Found: {cmd.ClassName}.{cmd.MethodName}", "ConsoleBridge", DiagnosticSeverity.Warning, true),
                                          cmd.Location));
-            var baseName = cmd.CustomName.Any() ? cmd.CustomName : $"{cmd.ClassName}.{cmd.MethodName}";
+            var baseName = cmd.CustomName ?? $"{cmd.ClassName}.{cmd.MethodName}";
             var overloads = GetOverloads(cmd);
             foreach (var overload in overloads) {
                 sb.AppendLine();
@@ -114,7 +116,12 @@ public sealed class ConsoleCommandBridgeGenerator : IIncrementalGenerator {
             }
         }
 
-        context.AddSource("ConsoleBridge.gd", sb.ToString());
+                context.AddSource("ConsoleBridge.gd", sb.ToString());
+        } catch (Exception ex) {
+            context.ReportDiagnostic(Diagnostic.Create(
+                new DiagnosticDescriptor("CCBG999", "Generator Crash", $"Exception in ConsoleCommandBridgeGenerator: {ex.Message} Stack Trace: {ex.StackTrace}", "ConsoleBridge", DiagnosticSeverity.Error, true),
+                Location.None));
+        }
     }
 
     private static List<List<ConsoleCommandParameter>> GetOverloads(ConsoleCommandInfo cmd) {
@@ -143,19 +150,25 @@ public sealed class ConsoleCommandBridgeGenerator : IIncrementalGenerator {
         _ => "Variant"
     };
 
-    private static string FormatDefault(object? value) => value switch {
-        null => "null",
-        string s => $"\"{s}\"",
-        bool b => b.ToString().ToLower(),
-        _ => value.ToString() ?? "null"
-    };
+    private static string FormatDefault(object? value) {
+        try {
+            return value switch {
+                null => "null",
+                string s => $"\"{s}\"",
+                bool b => b.ToString().ToLower(),
+                _ => value?.ToString() ?? "null"
+            };
+        } catch {
+            return "null";
+        }
+    }
 
     private record ConsoleCommandInfo(
         string ClassName,
         string MethodName,
         bool IsAsync,
         List<ConsoleCommandParameter> Parameters,
-        string CustomName,
+        string? CustomName,
         Location Location
     );
 
