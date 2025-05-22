@@ -98,7 +98,7 @@ public sealed class ConsoleCommandBridgeGenerator : IIncrementalGenerator {
             context.ReportDiagnostic(Diagnostic.Create(
                                          new DiagnosticDescriptor("CCBG001", "Command Found", $"Found: {cmd.ClassName}.{cmd.MethodName}", "ConsoleBridge", DiagnosticSeverity.Warning, true),
                                          cmd.Location));
-            var baseName = cmd.CustomName ?? $"{ToSnakeCase(cmd.ClassName)}.{cmd.MethodName}";
+            var baseName = cmd.CustomName ?? $"{cmd.ClassName}.{cmd.MethodName}";
             var overloads = GetOverloads(cmd);
             foreach (var overload in overloads) {
                 sb.AppendLine();
@@ -134,9 +134,6 @@ public sealed class ConsoleCommandBridgeGenerator : IIncrementalGenerator {
 
     private static string FormatArgs(List<ConsoleCommandParameter> parameters) =>
         string.Join(", ", parameters.Select(p => p.HasDefault ? p.Name + " ?? " + FormatDefault(p.DefaultValue) : p.Name));
-
-    private static string ToSnakeCase(string input) =>
-        string.Concat(input.Select((c, i) => i > 0 && char.IsUpper(c) ? "_" + char.ToLower(c) : char.ToLower(c).ToString()));
 
     private static string ToGDScriptType(string type) => type switch {
         "System.String" or "string" => "String",
