@@ -32,7 +32,7 @@ public sealed class ConsoleCommandBridgeGenerator : IIncrementalGenerator {
                                                               [AttributeUsage(AttributeTargets.Method)]
                                                               public sealed class ConsoleCommandAttribute : Attribute {
                                                                 public string CommandName { get; }
-                                                                public ConsoleCommandAttribute(string commandName = string.Empty) {
+                                                                public ConsoleCommandAttribute(string commandName = "") {
                                                                   CommandName = commandName;
                                                                 }
                                                               }
@@ -75,7 +75,7 @@ public sealed class ConsoleCommandBridgeGenerator : IIncrementalGenerator {
             MethodName: methodSymbol.Name,
             IsAsync: methodSymbol.IsAsync,
             Parameters: parameters,
-            CustomName: commandName,
+            CustomName: commandName?.Trim(),
             methodSyntax.GetLocation()
         );
     }
@@ -98,7 +98,7 @@ public sealed class ConsoleCommandBridgeGenerator : IIncrementalGenerator {
             context.ReportDiagnostic(Diagnostic.Create(
                                          new DiagnosticDescriptor("CCBG001", "Command Found", $"Found: {cmd.ClassName}.{cmd.MethodName}", "ConsoleBridge", DiagnosticSeverity.Warning, true),
                                          cmd.Location));
-            var baseName = cmd.CustomName ?? $"{cmd.ClassName}.{cmd.MethodName}";
+            var baseName = cmd.CustomName.Any() ? cmd.CustomName : $"{cmd.ClassName}.{cmd.MethodName}";
             var overloads = GetOverloads(cmd);
             foreach (var overload in overloads) {
                 sb.AppendLine();
@@ -155,7 +155,7 @@ public sealed class ConsoleCommandBridgeGenerator : IIncrementalGenerator {
         string MethodName,
         bool IsAsync,
         List<ConsoleCommandParameter> Parameters,
-        string? CustomName,
+        string CustomName,
         Location Location
     );
 
