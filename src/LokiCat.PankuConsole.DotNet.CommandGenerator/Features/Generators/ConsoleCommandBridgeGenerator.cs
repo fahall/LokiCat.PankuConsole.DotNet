@@ -42,14 +42,16 @@ public sealed class ConsoleCommandBridgeGenerator : IIncrementalGenerator {
     }
 
     private static ConsoleCommandInfo? GetConsoleCommandInfo(GeneratorSyntaxContext context) {
+        
         var methodSyntax = (MethodDeclarationSyntax)context.Node;
         var semanticModel = context.SemanticModel;
-        var methodSymbol = semanticModel.GetDeclaredSymbol(methodSyntax) as IMethodSymbol;
+        var methodSymbol = semanticModel.GetDeclaredSymbol(methodSyntax);
         if (methodSymbol is null)
         {
             return null;
         }
-
+        
+        
         var consoleAttrSymbol = context.SemanticModel.Compilation
                                        .GetTypeByMetadataName("LokiCat.PankuConsoleBridge.ConsoleCommandAttribute");
 
@@ -73,7 +75,8 @@ public sealed class ConsoleCommandBridgeGenerator : IIncrementalGenerator {
             MethodName: methodSymbol.Name,
             IsAsync: methodSymbol.IsAsync,
             Parameters: parameters,
-            CustomName: commandName
+            CustomName: commandName,
+            methodSyntax.GetLocation()
         );
     }
 
@@ -87,8 +90,14 @@ public sealed class ConsoleCommandBridgeGenerator : IIncrementalGenerator {
         {
             sb.AppendLine($"@onready var {cls} = get_node(\"%{cls}\")");
         }
-
+        context.ReportDiagnostic(Diagnostic.Create(
+                                     new DiagnosticDescriptor("CCBG002", "Emit", $"Emitting {commands.Count} commands", "ConsoleBridge", DiagnosticSeverity.Info, true),
+                                     Location.None));
+        
         foreach (var cmd in commands) {
+            context.ReportDiagnostic(Diagnostic.Create(
+                                         new DiagnosticDescriptor("CCBG001", "Command Found", $"Found: {cmd.ClassName}.{cmd.MethodName}", "ConsoleBridge", DiagnosticSeverity.Warning, true),
+                                         cmd.Location));
             var baseName = cmd.CustomName ?? $"{ToSnakeCase(cmd.ClassName)}.{cmd.MethodName}";
             var overloads = GetOverloads(cmd);
             foreach (var overload in overloads) {
@@ -149,7 +158,8 @@ public sealed class ConsoleCommandBridgeGenerator : IIncrementalGenerator {
         string MethodName,
         bool IsAsync,
         List<ConsoleCommandParameter> Parameters,
-        string? CustomName
+        string? CustomName,
+        Location Location
     );
 
     private record ConsoleCommandParameter(
