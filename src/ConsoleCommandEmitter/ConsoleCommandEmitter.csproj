@@ -12,7 +12,7 @@
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <PackageTags>godot panku</PackageTags>
         <RepositoryType>git</RepositoryType>
-        <AssemblyName>ConsoleCommandEmitter</AssemblyName>
+        <AssemblyName>LokiCat.PankuConsole.DotNet.CommandGenerator</AssemblyName>
         <AssemblyTitle>LokiCat.PankuConsole.DotNet.CommandGenerator</AssemblyTitle>
         <Description>Exposes C# Functions on Nodes to PankuConsole via [ConsoleCommand]</Description>
 
@@ -45,7 +45,7 @@
 
     <ItemGroup>
         <None Include="ConsoleCommandEmitter.targets" Pack="true" PackagePath="build" />
-        <Content Include="$(OutputPath)ConsoleCommandEmitter.dll" Pack="true" PackagePath="tools/net7.0/" />
+        <Content Include="$(OutputPath)LokiCat.PankuConsole.DotNet.CommandGenerator.dll" Pack="true" PackagePath="tools/net7.0/" />
     </ItemGroup>
     
 </Project>
