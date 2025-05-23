@@ -3,7 +3,7 @@
     <PropertyGroup>
         <Description>Generates GDScript PankuCommands based on DotNet [ConsoleCommand] Attribute</Description>
         <OutputType>Exe</OutputType>
-        <TargetFramework>net7.0</TargetFramework>
+        <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <RepositoryUrl>https://github.com/fahall/LokiCat.PankuConsole.DotNet.git</RepositoryUrl>
@@ -45,7 +45,7 @@
 
     <ItemGroup>
         <None Include="LokiCat.PankuConsole.DotNet.CommandGenerator.targets" Pack="true" PackagePath="build" />
-        <Content Include="$(OutputPath)LokiCat.PankuConsole.DotNet.CommandGenerator.dll" Pack="true" PackagePath="tools/net7.0/" />
+        <Content Include="$(OutputPath)LokiCat.PankuConsole.DotNet.CommandGenerator.dll" Pack="true" PackagePath="tools/net8.0/" />
     </ItemGroup>
     
 </Project>
