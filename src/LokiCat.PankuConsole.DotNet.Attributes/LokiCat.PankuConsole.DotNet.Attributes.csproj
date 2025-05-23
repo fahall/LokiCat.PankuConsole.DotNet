@@ -16,6 +16,14 @@
         <AssemblyName>LokiCat.PankuConsole.DotNet.Attributes</AssemblyName>
         <AssemblyTitle>LokiCat.PankuConsole.DotNet.Attributes</AssemblyTitle>
         <LangVersion>latest</LangVersion>
+
+        <IncludeBuildOutput>false</IncludeBuildOutput>
+
+        <!-- Enable proper packaging -->
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <OutputPath>bin\Release\</OutputPath>
+        <DebugSymbols>true</DebugSymbols>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     </PropertyGroup>
 
     <ItemGroup>
