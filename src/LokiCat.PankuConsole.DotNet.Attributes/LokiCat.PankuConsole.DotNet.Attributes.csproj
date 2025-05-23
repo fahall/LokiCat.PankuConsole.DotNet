@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <Authors>Alex Hall</Authors>
+        <Company>LokiCat</Company>
+        <Version>1.0.0</Version>
+        <Description>Provides [ConsoleCommand] for PankuConsole command discovery.</Description>
+        <PackageTags>godot panku consolecommand</PackageTags>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <RepositoryUrl>https://github.com/fahall/LokiCat.PankuConsole.DotNet</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <PackageProjectUrl>https://github.com/fahall/LokiCat.PankuConsole.DotNet</PackageProjectUrl>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <PackageIcon>icon.png</PackageIcon>
+        <AssemblyName>LokiCat.PankuConsole.DotNet.Attributes</AssemblyName>
+        <AssemblyTitle>LokiCat.PankuConsole.DotNet.Attributes</AssemblyTitle>
+        <LangVersion>latest</LangVersion>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <None Include="../icon.png" Pack="true" PackagePath="/" />
+        <None Include="../../README.md" Pack="true" PackagePath="" />
+    </ItemGroup>
+
+</Project>
