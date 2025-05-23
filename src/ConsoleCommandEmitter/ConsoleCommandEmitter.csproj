@@ -46,6 +46,7 @@
     <ItemGroup>
         <None Include="LokiCat.PankuConsole.DotNet.CommandGenerator.targets" Pack="true" PackagePath="build" />
         <Content Include="$(OutputPath)LokiCat.PankuConsole.DotNet.CommandGenerator.dll" Pack="true" PackagePath="tools/net8.0/" />
+        <Content Include="$(OutputPath)LokiCat.PankuConsole.DotNet.CommandGenerator.runtimeconfig.json" Pack="true" PackagePath="tools/net8.0/" />
     </ItemGroup>
     
 </Project>
