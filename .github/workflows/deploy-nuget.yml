@@ -37,10 +37,10 @@ jobs:
         uses: actions/setup-dotnet@v4
 
       - name: Build CLI Tool
-        run: dotnet build ConsoleCommandEmitter/ConsoleCommandEmitter.csproj --configuration Release
+        run: dotnet build ${{ vars.SOURCE_ROOT }}ConsoleCommandEmitter/ConsoleCommandEmitter.csproj --configuration Release
     
       - name: Pack CLI NuGet package
-        run: dotnet pack ConsoleCommandEmitter/ConsoleCommandEmitter.csproj --no-build --configuration Release --output "$NuGetDirectory" /p:Version=${{ inputs.version }}
+        run: dotnet pack ${{ vars.SOURCE_ROOT }}ConsoleCommandEmitter/ConsoleCommandEmitter.csproj --no-build --configuration Release --output "$NuGetDirectory" /p:Version=${{ inputs.version }}
 
       - name: Upload NuGet package
         uses: actions/upload-artifact@v4
