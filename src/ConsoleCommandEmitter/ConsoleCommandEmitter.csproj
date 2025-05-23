@@ -42,7 +42,9 @@
         <None Include="../icon.png" Pack="true" PackagePath="/" />
         <None Include="../../README.md" Pack="true" PackagePath="" />
     </ItemGroup>
-
+    <ItemGroup>
+        <PackageReference Include="System.Text.Json" Version="9.0.0" />
+    </ItemGroup>
     <ItemGroup>
         <None Include="LokiCat.PankuConsole.DotNet.CommandGenerator.targets" Pack="true" PackagePath="build" />
         <Content Include="$(OutputPath)LokiCat.PankuConsole.DotNet.CommandGenerator.dll" Pack="true" PackagePath="tools/net8.0/" />
