@@ -36,7 +36,10 @@
         <Product>LokiCat.PankuConsole.DotNet.CommandGenerator</Product>
         <DebugSymbols>true</DebugSymbols>
         <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-        
+
+        <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+
+
     </PropertyGroup>
     <ItemGroup>
         <None Include="../icon.png" Pack="true" PackagePath="/" />
@@ -47,8 +50,7 @@
     </ItemGroup>
     <ItemGroup>
         <None Include="LokiCat.PankuConsole.DotNet.CommandGenerator.targets" Pack="true" PackagePath="build" />
-        <Content Include="$(OutputPath)LokiCat.PankuConsole.DotNet.CommandGenerator.dll" Pack="true" PackagePath="tools/net8.0/" />
-        <Content Include="$(OutputPath)LokiCat.PankuConsole.DotNet.CommandGenerator.runtimeconfig.json" Pack="true" PackagePath="tools/net8.0/" />
+        <Content Include="$(OutputPath)*.dll" Pack="true" PackagePath="tools/net8.0/" />
+        <Content Include="$(OutputPath)*.json" Pack="true" PackagePath="tools/net8.0/" />
     </ItemGroup>
-    
 </Project>
