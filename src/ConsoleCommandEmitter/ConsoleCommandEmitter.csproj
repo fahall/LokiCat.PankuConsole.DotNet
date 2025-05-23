@@ -1,10 +1,43 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
+        <Description>Generates GDScript PankuCommands based on DotNet [ConsoleCommand] Attribute</Description>
         <OutputType>Exe</OutputType>
-        <TargetFramework>net8.0</TargetFramework>
+        <TargetFramework>net7.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <RepositoryUrl>https://github.com/fahall/LokiCat.PankuConsole.DotNet.git</RepositoryUrl>
+        <PackageProjectUrl>https://github.com/fahall/LokiCat.PankuConsole.DotNet</PackageProjectUrl>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageTags>godot panku</PackageTags>
+        <RepositoryType>git</RepositoryType>
+        <AssemblyName>LokiCat.PankuConsole.DotNet.CommandGenerator</AssemblyName>
+        <AssemblyTitle>LokiCat.PankuConsole.DotNet.CommandGenerator</AssemblyTitle>
+        <Description>Exposes C# Functions on Nodes to PankuConsole via [ConsoleCommand]</Description>
+
+
+        <!-- Ensure this is an analyzer, not a runtime library -->
+        <IsRoslynComponent>true</IsRoslynComponent>
+        <IncludeBuildOutput>false</IncludeBuildOutput>
+
+        <!-- Enable proper packaging -->
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <OutputPath>bin\Release\</OutputPath>
+
+        <!-- Package Metadata -->
+        <Version>1.0.0</Version>
+        <Authors>Alex Hall</Authors>
+        <PackageIcon>icon.png</PackageIcon>
+        <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
+        <EmbedAllSources>true</EmbedAllSources>
+        <SourceLinkCreate>true</SourceLinkCreate>
+        <Company>LokiCat</Company>
+        <Product>LokiCat.PankuConsole.DotNet.CommandGenerator</Product>
+        <DebugSymbols>true</DebugSymbols>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+        <IsRoslynComponent>true</IsRoslynComponent>
+        
     </PropertyGroup>
 
     <ItemGroup>
