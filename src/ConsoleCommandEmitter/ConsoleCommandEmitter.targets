@@ -1,5 +1,5 @@
 ﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <Target Name="EmitConsoleBridgeFromNuGet" AfterTargets="Build">
-        <Exec Command="dotnet &quot;$(MSBuildThisFileDirectory)..\tools\net8.0\ConsoleCommandEmitter.dll&quot; $(ProjectDir)Generated $(TargetPath)" />
+        <Exec Command="dotnet &quot;$(MSBuildThisFileDirectory)..\tools\net7.0\ConsoleCommandEmitter.dll&quot; $(ProjectDir)Generated $(TargetPath)" />
     </Target>
 </Project>
