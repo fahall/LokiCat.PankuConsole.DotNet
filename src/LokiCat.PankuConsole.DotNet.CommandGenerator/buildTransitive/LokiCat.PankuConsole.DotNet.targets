@@ -1,5 +1,0 @@
-﻿<Project>
-    <ItemGroup>
-        <Analyzer Include="$(MSBuildThisFileDirectory)..\analyzers\dotnet\cs\LokiCat.PankuConsole.DotNet.CommandGenerator.dll" />
-    </ItemGroup>
-</Project>

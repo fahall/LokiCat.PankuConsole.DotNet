@@ -36,11 +36,11 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
 
-      - name: Build project
-        run: dotnet build src/LokiCat.PankuConsole.DotNet.CommandGenerator/LokiCat.PankuConsole.DotNet.CommandGenerator.csproj --configuration Release -p:Deterministic=true -p:ContinuousIntegrationBuild=true -p:PathMap=`pwd`=.
-
-      - name: Pack project
-        run: dotnet pack src/LokiCat.PankuConsole.DotNet.CommandGenerator/LokiCat.PankuConsole.DotNet.CommandGenerator.csproj --no-build --configuration Release --output "$NuGetDirectory" /p:Version=${{ inputs.version }}
+      - name: Build CLI Tool
+        run: dotnet build ConsoleCommandEmitter/ConsoleCommandEmitter.csproj --configuration Release
+    
+      - name: Pack CLI NuGet package
+        run: dotnet pack ConsoleCommandEmitter/ConsoleCommandEmitter.csproj --no-build --configuration Release --output "$NuGetDirectory" /p:Version=${{ inputs.version }}
 
       - name: Upload NuGet package
         uses: actions/upload-artifact@v4

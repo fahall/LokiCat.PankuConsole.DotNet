@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LokiCat.PankuConsole.DotNet.CommandGenerator", "LokiCat.PankuConsole.DotNet.CommandGenerator\LokiCat.PankuConsole.DotNet.CommandGenerator.csproj", "{3B07270D-BB42-4B77-BE30-824C112F298C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleCommandEmitter", "ConsoleCommandEmitter\ConsoleCommandEmitter.csproj", "{4DBABB5B-67F4-4052-8015-F98590668D22}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,9 +24,9 @@ Global
 		{837AB06C-52CC-43B9-A5A2-9073A566F208}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{837AB06C-52CC-43B9-A5A2-9073A566F208}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{837AB06C-52CC-43B9-A5A2-9073A566F208}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3B07270D-BB42-4B77-BE30-824C112F298C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3B07270D-BB42-4B77-BE30-824C112F298C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3B07270D-BB42-4B77-BE30-824C112F298C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3B07270D-BB42-4B77-BE30-824C112F298C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4DBABB5B-67F4-4052-8015-F98590668D22}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4DBABB5B-67F4-4052-8015-F98590668D22}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4DBABB5B-67F4-4052-8015-F98590668D22}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4DBABB5B-67F4-4052-8015-F98590668D22}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
